@@ -174,6 +174,9 @@ func unusedDeps(depsFileName string, depsByJar map[string]string) (unusedDeps ma
 
 // parseBuildFile tries to read and parse the contents of buildFileName.
 func parseBuildFile(buildFileName string) (buildFile *build.File, err error) {
+	if(!strings.HasSuffix(buildFileName, ".bazel")) {
+		buildFileName += ".bazel"
+	}
 	data, err := ioutil.ReadFile(buildFileName)
 	if err != nil {
 		return nil, err
